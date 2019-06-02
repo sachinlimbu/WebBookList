@@ -17,6 +17,11 @@ namespace WebBookList.Web.Pages.BookList
         {
             this.webBookListDbContext = webBookListDbContext;
         }
+
+
+        [TempData]
+        public string Message { get; set; }
+
         [BindProperty]
         public Book Book { get; set; }
         public async Task OnGet(int id)
@@ -34,7 +39,7 @@ namespace WebBookList.Web.Pages.BookList
                 BookFromDb.AuthorName = Book.AuthorName;
 
                 await webBookListDbContext.SaveChangesAsync();
-
+                Message = "Book edited successfully";
                 return RedirectToPage("Index");
             }
             return RedirectToPage();

@@ -17,6 +17,11 @@ namespace WebBookList.Web.Pages.BookList
             this.webBookListDbContext = webBookListDbContext;
         }
         public IEnumerable<Book> books { get; set; }
+
+        [TempData]
+        public string Message { get; set; }
+
+
         public async Task OnGet()
         {
             books = await webBookListDbContext.Books.ToListAsync();
@@ -30,7 +35,7 @@ namespace WebBookList.Web.Pages.BookList
             }
             webBookListDbContext.Books.Remove(book);
             await webBookListDbContext.SaveChangesAsync();
-
+            Message = "Book Deleted Successfully";
             return RedirectToPage("Index");
         }
 

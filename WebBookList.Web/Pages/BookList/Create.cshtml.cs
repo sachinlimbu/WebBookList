@@ -19,6 +19,9 @@ namespace WebBookList.Web.Pages.BookList
         }
         [BindProperty]
         public Book Book { get; set; }
+
+        [TempData]
+        public string Message { get; set; }
         public void OnGet()
         {
 
@@ -32,6 +35,7 @@ namespace WebBookList.Web.Pages.BookList
             }
             webBookListDbContext.Books.Add(Book);
             await webBookListDbContext.SaveChangesAsync();
+            Message = "Book created successfully";
             return RedirectToPage("Index");
         }
     }
